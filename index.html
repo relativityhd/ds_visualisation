@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="./Styles/components.css">
+
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        <script src="./Scripts/jquery.slim.min.js"></script>
+        <script src="./Scripts/plotly.min.js"></script>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    </head>
+    
+    <body class="mdc-typography">
+        <!-- MDC Top App Bar-->
+        <header class="mdc-top-app-bar mdc-top-app-bar--fixed">
+            <div class="mdc-top-app-bar__row">
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                    <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Open navigation menu">menu</button>
+                    <span class="mdc-top-app-bar__title">Flights Dashboard</span>
+                </section>
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                    <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Favorite">favorite</button>
+                    <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Search">search</button>
+                    <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Options">more_vert</button>
+                </section>
+            </div>
+        </header>
+        <main>
+            <!-- MDC Tabs -->
+            <div class="mdc-tab-bar" role="tablist">
+                <div class="mdc-tab-scroller">
+                    <div class="mdc-tab-scroller__scroll-area">
+                        <div class="mdc-tab-scroller__scroll-content">
+                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0" data-content="latency">
+                                <span class="mdc-tab__content">
+                                    <span class="mdc-tab__icon material-icons" aria-hidden="true">schedule</span>
+                                    <span class="mdc-tab__text-label">Verspätungen</span>
+                                </span>
+                                <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                </span>
+                                <span class="mdc-tab__ripple"></span>
+                            </button>
+                            <button class="mdc-tab" role="tab" aria-selected="false" tabindex="1" data-content="weather">
+                                <span class="mdc-tab__content">
+                                    <span class="mdc-tab__icon material-icons" aria-hidden="true">filter_drama</span>
+                                    <span class="mdc-tab__text-label">Wetter</span>
+                                </span>
+                                <span class="mdc-tab-indicator">
+                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                </span>
+                                <span class="mdc-tab__ripple"></span>
+                            </button>
+                            <button class="mdc-tab" role="tab" aria-selected="false" tabindex="2" data-content="creative">
+                                <span class="mdc-tab__content">
+                                    <span class="mdc-tab__icon material-icons" aria-hidden="true">donut_large</span>
+                                    <span class="mdc-tab__text-label">Creative</span>
+                                </span>
+                                <span class="mdc-tab-indicator">
+                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                </span>
+                                <span class="mdc-tab__ripple"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-content-latency" class="tab-content">
+                <h1>Verspätungen</h1>
+            </div>
+
+            <div id="tab-content-weather" class="tab-content">
+                <h1>Wetter</h1>
+            </div>
+
+            <div id="tab-content-creative" class="tab-content">
+                <h1>Creative</h1>
+            </div>
+        </main>
+    </body>
+    
+    <script>
+
+        // Function to handle active and non active content tabs
+        let active_content;
+        function init_tabs() {
+            $('.tab-content').hide()
+            active_content = $('#tab-content-latency');
+            active_content.show()
+
+            $('.mdc-tab').on("click", ( index ) => {
+                let should_be_active_keyword = index.currentTarget.getAttribute("data-content")
+                if (active_content) active_content.hide()
+                active_content = $('#tab-content-'+should_be_active_keyword);
+                active_content.show()
+            })
+        }
+
+        // Start Script only after loading the whole page!
+        $( document ).ready(function() {
+
+            // Initialize tabs
+            init_tabs()
+
+            // Initialize all mdc button ripples
+            for (e of $('.mdc-button').get()) { mdc.ripple.MDCRipple.attachTo(e); }
+            for (e of $('.mdc-fab').get()) { mdc.ripple.MDCRipple.attachTo(e); }
+            for (e of $('.mdc-icon-button').get()) { new mdc.ripple.MDCRipple(e).unbounded = true; }
+
+            const topAppBar = new mdc.topAppBar.MDCTopAppBar($('.mdc-top-app-bar').get(0));
+            const tabBar = new mdc.tabBar.MDCTabBar($('.mdc-tab-bar').get(0));
+            // MDC automatic initalizing
+            mdc.autoInit();
+        });
+    </script>
+</html>

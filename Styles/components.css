@@ -1,0 +1,18 @@
+:root{
+    --mdc-theme-primary: #37474f;
+    --mdc-theme-secondary: #ff9100;
+    --mdc-theme-on-primary: #ffffff;
+    --mdc-theme-on-secondary: #37474f;
+}
+
+html, body {
+    margin: 0;
+}
+
+main {
+    padding-top: 64px;
+}
+
+.tab-content{
+    padding: 5px 20px;
+}
