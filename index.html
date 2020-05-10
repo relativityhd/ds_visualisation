@@ -8,6 +8,7 @@
         <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
         <script src="./Scripts/jquery.slim.min.js"></script>
         <script src="./Scripts/plotly.min.js"></script>
+        <script src="./Scripts/latency.js"></script>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
@@ -18,13 +19,7 @@
         <header class="mdc-top-app-bar mdc-top-app-bar--fixed">
             <div class="mdc-top-app-bar__row">
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                    <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Open navigation menu">menu</button>
                     <span class="mdc-top-app-bar__title">Flights Dashboard</span>
-                </section>
-                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-                    <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Favorite">favorite</button>
-                    <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Search">search</button>
-                    <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Options">more_vert</button>
                 </section>
             </div>
         </header>
@@ -69,14 +64,34 @@
                 </div>
             </div>
 
+            <!-- Verspätungsinhalt Tab -->
             <div id="tab-content-latency" class="tab-content">
                 <h1>Verspätungen</h1>
+                <div id="map-div"></div>
             </div>
 
+            <!-- Wetterinhalt Tab -->
             <div id="tab-content-weather" class="tab-content">
                 <h1>Wetter</h1>
+                <div class="mdc-checkbox">
+                    <input type="checkbox"
+                           class="mdc-checkbox__native-control"
+                           id="checkbox-1"/>
+                    <div class="mdc-checkbox__background">
+                      <svg class="mdc-checkbox__checkmark"
+                           viewBox="0 0 24 24">
+                        <path class="mdc-checkbox__checkmark-path"
+                              fill="none"
+                              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                      </svg>
+                      <div class="mdc-checkbox__mixedmark"></div>
+                    </div>
+                    <div class="mdc-checkbox__ripple"></div>
+                  </div>
+                  <label for="checkbox-1">Checkbox 1</label>
             </div>
 
+            <!-- Sonstigesinhalt Tab -->
             <div id="tab-content-creative" class="tab-content">
                 <h1>Creative</h1>
             </div>
