@@ -66,8 +66,81 @@
 
             <!-- Verspätungsinhalt Tab -->
             <div id="tab-content-latency" class="tab-content">
-                <h1>Verspätungen</h1>
-                <div id="map-div"></div>
+                <h1 class="mdc-typography--headline1">Verspätungen</h1>
+                <div class="mapWrapper">
+                    <div class="map-plot" id="map-plot"></div>
+                    <div class="map-selections">
+
+                        <h1 class="mdc-typography--headline3">Flughafen</h1>
+                        <div class="selections-wrapper mdc-form-field">
+                            <div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-ankunft-port" name="radios-port" value="ankunft-port" onclick="map_radio_changed('port', this);" checked>
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label for="radio-ankunft-port">Ankunfts Flughafen</label>
+
+                            <div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-abflug-port" name="radios-port" value="abflug-port" onclick="map_radio_changed('port', this);">
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label for="radio-abflug-port">Abflugs Flughafen</label>
+                        </div>
+
+                        <h1 class="mdc-typography--headline3">Verspätung</h1>
+                        <div class="selections-wrapper mdc-form-field">
+                            <div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-ankunft-late" name="radios-late" value="ankunft-late" onclick="map_radio_changed('late', this);" checked>
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label for="radio-ankunft-late">Verspätung bei Ankunft</label>
+
+                            <div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-abflug-late" name="radios-late" value="abflug-late" onclick="map_radio_changed('late', this);">
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label for="radio-abflug-late">Verspätung bei Abflug</label>
+                        </div>
+
+                        <h1 class="mdc-typography--headline3">Zeit</h1>
+                        <div class="selections-wrapper mdc-form-field">
+                            <div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-flugzeit" name="radios-time" value="flugzeit" onclick="map_radio_changed('time', this);" checked>
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label for="radio-flugzeit">Flugzeit</label>
+
+                            <div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-aufgeholt" name="radios-time" value="aufgeholt" onclick="map_radio_changed('time', this);">
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label for="radio-aufgeholt">Aufgeholte Verspätung</label>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Wetterinhalt Tab -->

@@ -1,6 +1,6 @@
 :root{
     --mdc-theme-primary: #37474f;
-    --mdc-theme-secondary: #ff9100;
+    --mdc-theme-secondary: #37474f/*#ff9100*/;
     --mdc-theme-on-primary: #ffffff;
     --mdc-theme-on-secondary: #37474f;
 }
@@ -15,4 +15,19 @@ main {
 
 .tab-content{
     padding: 5px 20px;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mapWrapper{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.map-plot{
+    min-width: 300px;
+    width: 90%;
+    max-width: 1000px;
 }
