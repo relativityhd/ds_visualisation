@@ -64,16 +64,18 @@
                 </div>
             </div>
 
+
+
+
             <!-- Verspätungsinhalt Tab -->
             <div id="tab-content-latency" class="tab-content">
-                <h1 class="mdc-typography--headline1">Verspätungen</h1>
                 <div class="mapWrapper">
                     <div class="map-plot" id="map-plot"></div>
                     <div class="map-selections">
 
-                        <h1 class="mdc-typography--headline3">Flughafen</h1>
+                        <h1 class="mdc-typography--headline4">Flughafen</h1>
                         <div class="selections-wrapper mdc-form-field">
-                            <div class="mdc-radio">
+                            <div><div class="mdc-radio">
                                 <input class="mdc-radio__native-control" type="radio" id="radio-ankunft-port" name="radios-port" value="ankunft-port" onclick="map_radio_changed('port', this);" checked>
                                 <div class="mdc-radio__background">
                                     <div class="mdc-radio__outer-circle"></div>
@@ -81,9 +83,9 @@
                                 </div>
                                 <div class="mdc-radio__ripple"></div>
                             </div>
-                            <label for="radio-ankunft-port">Ankunfts Flughafen</label>
+                            <label class="specialLabel" for="radio-ankunft-port">Ankunfts Flughafen</label></div>
 
-                            <div class="mdc-radio">
+                            <div><div class="mdc-radio">
                                 <input class="mdc-radio__native-control" type="radio" id="radio-abflug-port" name="radios-port" value="abflug-port" onclick="map_radio_changed('port', this);">
                                 <div class="mdc-radio__background">
                                     <div class="mdc-radio__outer-circle"></div>
@@ -91,12 +93,12 @@
                                 </div>
                                 <div class="mdc-radio__ripple"></div>
                             </div>
-                            <label for="radio-abflug-port">Abflugs Flughafen</label>
+                            <label class="specialLabel" for="radio-abflug-port">Abflugs Flughafen</label></div>
                         </div>
 
-                        <h1 class="mdc-typography--headline3">Verspätung</h1>
+                        <h1 class="mdc-typography--headline4">Verspätung</h1>
                         <div class="selections-wrapper mdc-form-field">
-                            <div class="mdc-radio">
+                            <div><div class="mdc-radio">
                                 <input class="mdc-radio__native-control" type="radio" id="radio-ankunft-late" name="radios-late" value="ankunft-late" onclick="map_radio_changed('late', this);" checked>
                                 <div class="mdc-radio__background">
                                     <div class="mdc-radio__outer-circle"></div>
@@ -104,9 +106,9 @@
                                 </div>
                                 <div class="mdc-radio__ripple"></div>
                             </div>
-                            <label for="radio-ankunft-late">Verspätung bei Ankunft</label>
+                            <label class="specialLabel" for="radio-ankunft-late">Verspätung bei Ankunft</label></div>
 
-                            <div class="mdc-radio">
+                            <div><div class="mdc-radio">
                                 <input class="mdc-radio__native-control" type="radio" id="radio-abflug-late" name="radios-late" value="abflug-late" onclick="map_radio_changed('late', this);">
                                 <div class="mdc-radio__background">
                                     <div class="mdc-radio__outer-circle"></div>
@@ -114,12 +116,12 @@
                                 </div>
                                 <div class="mdc-radio__ripple"></div>
                             </div>
-                            <label for="radio-abflug-late">Verspätung bei Abflug</label>
+                            <label class="specialLabel" for="radio-abflug-late">Verspätung bei Abflug</label></div>
                         </div>
 
-                        <h1 class="mdc-typography--headline3">Zeit</h1>
+                        <h1 class="mdc-typography--headline4">Zeit</h1>
                         <div class="selections-wrapper mdc-form-field">
-                            <div class="mdc-radio">
+                            <div><div class="mdc-radio">
                                 <input class="mdc-radio__native-control" type="radio" id="radio-flugzeit" name="radios-time" value="flugzeit" onclick="map_radio_changed('time', this);" checked>
                                 <div class="mdc-radio__background">
                                     <div class="mdc-radio__outer-circle"></div>
@@ -127,9 +129,9 @@
                                 </div>
                                 <div class="mdc-radio__ripple"></div>
                             </div>
-                            <label for="radio-flugzeit">Flugzeit</label>
+                            <label class="specialLabel" for="radio-flugzeit">Flugzeit</label></div>
 
-                            <div class="mdc-radio">
+                            <div><div class="mdc-radio">
                                 <input class="mdc-radio__native-control" type="radio" id="radio-aufgeholt" name="radios-time" value="aufgeholt" onclick="map_radio_changed('time', this);">
                                 <div class="mdc-radio__background">
                                     <div class="mdc-radio__outer-circle"></div>
@@ -137,32 +139,199 @@
                                 </div>
                                 <div class="mdc-radio__ripple"></div>
                             </div>
-                            <label for="radio-aufgeholt">Aufgeholte Verspätung</label>
+                            <label class="specialLabel" for="radio-aufgeholt">Aufgeholte Verspätung</label></div>
+                        </div>
+
+                        <h1 class="mdc-typography--headline4">Operator</h1>
+                        <div class="selections-wrapper mdc-form-field">
+                            <div><div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-avg" name="radios-map-op" value="AVG" onclick="map_radio_changed('map-op', this);" checked>
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label class="specialLabel" for="radio-avg">Durschnitt (AVG)</label></div>
+
+                            <div><div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-sum" name="radios-map-op" value="SUM" onclick="map_radio_changed('map-op', this);">
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label class="specialLabel" for="radio-sum">Absolut (SUM)</label></div>
+                        </div>
+
+                        <h1 class="mdc-typography--headline4">Grafikerklärung</h1>
+                        <div class="selections-wrapper">
+                            <span class="mdc-typography--body1">
+                                In dieser interaktiven Grafik ist eine Karte von den Vereinigten Staaten Amerikas zu sehen. Die einzelnen Punkte repräsentieren Flughäfen.
+                                Je größer ein Punkt, umso Verspäteter sind die Flüge beim Abflug oder bei Ankunft. Welches davon kann der Benutzer auswählen.
+                                Auf der rechten Seite befindet sich eine Farbscalar, welche die Flugzeit in Minuten pro 1000km oder die Aufgeholte Verspätung in Minuten pro 1000km 
+                                farblich darstellt. Auch hier kann der Benutzer wählen. Im Allgemeinen kann der Benutzer auch wählen, ob mit Absoluten oder Durchschnittswerten gerechnet 
+                                werden soll. Ebenso kann er wählen, ob die Flughäfen nach Ankünften oder nach Abflügen dargestellt werden sollen.
+                            </span>
                         </div>
                     </div>
                 </div>
+
+                <hr>
+
+                <div class="barWrapper">
+                    <div class="bar-selections">
+                        <h1 class="mdc-typography--headline4">X-Achse</h1>
+                        <div class="selections-wrapper mdc-form-field">
+                            <div><div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-x-ankunft-port" name="radios-x" value="ankunft-port" onclick="bar_radio_changed('x', this);" checked>
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label class="specialLabel" for="radio-x-ankunft-port">Ankunfts Flughafen</label></div>
+
+                            <div><div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-x-abflug-port" name="radios-x" value="abflug-port" onclick="bar_radio_changed('x', this);">
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label class="specialLabel" for="radio-x-abflug-port">Abflugs Flughafen</label></div>
+
+                            <div><div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-x-airline" name="radios-x" value="airline" onclick="bar_radio_changed('x', this);">
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label class="specialLabel" for="radio-x-airline">Airline</label></div>
+
+                            <div><div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-x-flugnummer" name="radios-x" value="flugnummer" onclick="bar_radio_changed('x', this);">
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label class="specialLabel" for="radio-x-flugnummer">Flugnummer</label></div>
+                        </div>
+
+                        <h1 class="mdc-typography--headline4">Y-Achse</h1>
+                        <div class="selections-wrapper mdc-form-field">
+                            <div><div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-y-ankunft-late" name="radios-y" value="ankunft-late" onclick="bar_radio_changed('y', this);" checked>
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label class="specialLabel" for="radio-y-ankunft-late">Verspätung bei Ankunft</label></div>
+
+                            <div><div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-y-abflug-late" name="radios-y" value="abflug-late" onclick="bar_radio_changed('y', this);">
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label class="specialLabel" for="radio-y-abflug-late">Verspätung bei Abflug</label></div>
+
+                            
+                            <div><div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-y-flugzeit" name="radios-y" value="flugzeit" onclick="bar_radio_changed('y', this);">
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label class="specialLabel" for="radio-y-flugzeit">Flugzeit</label></div>
+
+                            
+                            <div><div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-y-aufgeholt" name="radios-y" value="aufgeholt" onclick="bar_radio_changed('y', this);">
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label class="specialLabel" for="radio-y-aufgeholt">Aufgeholte Verspätung</label></div>
+                        </div>
+
+                        <h1 class="mdc-typography--headline4">Operator</h1>
+                        <div class="selections-wrapper mdc-form-field">
+                            <div><div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-avg-bar" name="radios-bar-op" value="AVG" onclick="bar_radio_changed('bar-op', this);" checked>
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label class="specialLabel" for="radio-avg-bar">Durschnitt (AVG)</label></div>
+
+                            <div><div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-sum-bar" name="radios-bar-op" value="SUM" onclick="bar_radio_changed('bar-op', this);">
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label class="specialLabel" for="radio-sum-bar">Absolut (SUM)</label></div>
+                        </div>
+
+                        <h1 class="mdc-typography--headline4">Grafikerklärung</h1>
+                        <div class="selections-wrapper">
+                            <span class="mdc-typography--body1">
+                                In dieser interaktiven Grafik ist ein Bar Chart zu sehen. Diese kann die Daten aus der Map mit konkreten Zahlen darstellen.
+                                Auch hier hat der Benutzer wieder Wahlmöglichkeiten, ähnlich wie oben. Zusätzlich zu den Flughäfen kann er noch zwischen Airlines und Flugnummern wählen.
+                            </span>
+                        </div>
+                    </div>
+                    <div class="bar-plot" id="bar-plot"></div>
+                </div>
+
+                <hr>
+
+                <div class="pieWrapper">
+                    <div class="pie-selections">
+                        <h1 class="mdc-typography--headline4">Grafikerklärung</h1>
+                        <div class="selections-wrapper">
+                            <span class="mdc-typography--body1">
+                                In dieser interaktiven Grafik ist ein Bar Chart zu sehen. Hier werden die 5 meistverspätesten Flüge angezeigt, 
+                                sowie zum Vergleich den Durschnitt der Summen des Restes.
+                            </span>
+                        </div>
+                    </div>
+                    <div class="pie-plot" id="pie-plot"></div>
+                </div>
             </div>
+
+
+
+
 
             <!-- Wetterinhalt Tab -->
             <div id="tab-content-weather" class="tab-content">
                 <h1>Wetter</h1>
-                <div class="mdc-checkbox">
-                    <input type="checkbox"
-                           class="mdc-checkbox__native-control"
-                           id="checkbox-1"/>
-                    <div class="mdc-checkbox__background">
-                      <svg class="mdc-checkbox__checkmark"
-                           viewBox="0 0 24 24">
-                        <path class="mdc-checkbox__checkmark-path"
-                              fill="none"
-                              d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                      </svg>
-                      <div class="mdc-checkbox__mixedmark"></div>
-                    </div>
-                    <div class="mdc-checkbox__ripple"></div>
-                  </div>
-                  <label for="checkbox-1">Checkbox 1</label>
             </div>
+
+
+
+
 
             <!-- Sonstigesinhalt Tab -->
             <div id="tab-content-creative" class="tab-content">
@@ -171,6 +340,10 @@
         </main>
     </body>
     
+
+
+
+
     <script>
 
         // Function to handle active and non active content tabs

@@ -20,14 +20,37 @@ main {
     margin-right: auto;
 }
 
-.mapWrapper{
+.mapWrapper,
+.barWrapper,
+.pieWrapper{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-.map-plot{
+.map-plot,
+.bar-plot,
+.pie-plot{
     min-width: 300px;
-    width: 90%;
+    width: 98%;
     max-width: 1000px;
+    min-height: 700px;
+}
+
+.map-selections,
+.bar-selections,
+.pie-selections{
+    min-width: 200px;
+    width: 98%;
+    max-width: 400px;
+}
+
+.selections-wrapper{
+    flex-wrap: wrap;
+}
+
+.specialLabel{
+    display: inline-block;
+    transform: translateY(-4px);
+    cursor: pointer;
 }
