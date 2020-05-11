@@ -10,7 +10,7 @@
  * - ORIGIN_AIRPORT (Abflug-Flughafen)
  * - DEPARTURE_DELAY (Abflug Verspätung)
  * - DESTINATION_DELAY (Ankunft Verspätung)
- * - (SCHEDULED_TIME - ELAPSED_TIME) * 100 / (DISTANCE) (Flugzeit / 100 km)
+ * - ELAPSED_TIME * 100 / (DISTANCE) (Flugzeit / 100 km)
  * - (DESTINATION_DELAY - DEPARTURE_DELAY) * 100 / (DISTANCE) (Aufgeholte Verspätung / 100 km)
  * 
  * Interaktive Gründe:
@@ -83,10 +83,10 @@ let dest_airports = {},
 // D3 CSV Input
 Plotly.d3.csv(
     // Ist  nicht die locale file, weil ditt iwie nicht funktioniert aufgrund von Zugriffsbeschränkungen mit JavaScript
-	"https://gist.githubusercontent.com/florianeichin/b877d354d6bc52e6ce840572e40b0497/raw/19759410471073756a388dada5fcb40109f0d13e/flights_subset_cleaned.csv", // Subset
-	//"https://gist.githubusercontent.com/florianeichin/cfa1705e12ebd75ff4c321427126ccee/raw/c86301a0e5d0c1757d325424b8deec04cc5c5ca9/flights_all_cleaned.csv", // Richtiges
+	//"https://gist.githubusercontent.com/florianeichin/b877d354d6bc52e6ce840572e40b0497/raw/19759410471073756a388dada5fcb40109f0d13e/flights_subset_cleaned.csv", // Subset
+	"https://gist.githubusercontent.com/florianeichin/cfa1705e12ebd75ff4c321427126ccee/raw/c86301a0e5d0c1757d325424b8deec04cc5c5ca9/flights_all_cleaned.csv", // Richtiges
 	(err, rows) => {
-
+		console.log(rows)
 		// Überprüfe die Inputs zum Sicherstellen
 		airport_choice = $('input[name=radios-port]:checked').val()
 		late_choice = $('input[name=radios-late]:checked').val()
@@ -123,7 +123,7 @@ Plotly.d3.csv(
 				rows_dist = parseFloat(row["DISTANCE"])
 			
 			// Berechnung Flugzeit / 100km
-			let flght_km = parseFloat((rows_scd_time - rows_elap_time) * 1000 / rows_dist),
+			let flght_km = parseFloat(rows_elap_time * 1000 / rows_dist),
 				rcvd_flght_km = parseFloat((rows_dest_delay - rows_dep_delay) * 1000 / rows_dist)
 
 			// dad = destination airport data, oad = origin airport data, ald = airline data, fnd = flight (number) data
@@ -203,7 +203,7 @@ Plotly.d3.csv(
 				// Erstelle nested Object, später wird der durchschnitt ausgerechnet
 				// AIRPORT beschreibt hier die Flugnummer, damit die unpack funktion weiterhin funktioniert
 				flights[rows_flight] = {
-					"AIRPORT": "FLIGHT-"+rows_flight,
+					"AIRPORT": "FLT-"+rows_flight,
 					"DEPARTURE_DELAY": [ rows_dep_delay ],
 					"DESTINATION_DELAY": [ rows_dest_delay ],
 					"FLIGHTTIME_KM": [ flght_km ],
