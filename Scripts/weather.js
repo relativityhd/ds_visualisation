@@ -55,7 +55,7 @@ async function runPie(currentTime) {
     renderBarPercentage()
 }
 
-async function runPieAllTime(radioButton) {
+async function runPieAllTime(value) {
     delayedFlightsAllTime = 0
     punctualFlightsAllTime = 0
     absoluteDelayAllTime = 0
@@ -75,10 +75,10 @@ async function runPieAllTime(radioButton) {
         }
         
     })
-    if (radioButton.value == "percentage") {
+    if (value == "percentage") {
         renderWeatherPieAllTimePercentage()
     }
-    else if (radioButton.value == "absolute") {
+    else if (value == "absolute") {
         renderWeatherPieAllTimeAbsolute()
     }
 }
@@ -205,12 +205,7 @@ function renderWeatherPieAllTimePercentage(){
         type: 'pie'
       }];
       
-    let layout = {
-        height: 400,
-        width: 500
-      };
-      
-    Plotly.newPlot('weatherAllTime', departureDelayPie, layout, {responsive: true});
+    Plotly.newPlot('weatherAllTime', departureDelayPie, {}, {responsive: true});
 
 }
 function renderWeatherPieAllTimeAbsolute(){
@@ -222,7 +217,7 @@ function renderWeatherPieAllTimeAbsolute(){
         }
       ];
       
-      Plotly.newPlot('weatherAllTime', data, {responsive: true});
+      Plotly.newPlot('weatherAllTime', data, {}, {responsive: true});
 
 }
 function renderWeatherPieHourly(){
@@ -232,12 +227,7 @@ function renderWeatherPieHourly(){
         type: 'pie'
       }];
       
-    let layoutHourly = {
-        height: 400,
-        width: 500
-      };
-      
-    Plotly.newPlot('weatherPieHourly', departureDelayPieHourly, layoutHourly, {responsive: true});
+    Plotly.newPlot('weatherPieHourly', departureDelayPieHourly, {}, {responsive: true});
 
 }
 function renderBarPercentage(){
@@ -271,7 +261,8 @@ function renderBarPercentage(){
     Plotly.newPlot('weatherBarGraph', data, layout, {responsive: true});
 }
 
-
-  runPie(12)
-  runBar()
-  
+function weather_main() {
+    runPie(12)
+    runBar()
+    runPieAllTime('percentage')
+}

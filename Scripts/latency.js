@@ -80,9 +80,10 @@ let dest_airports = {},
 	airlines = {},
 	flights = {}
 
-// D3 CSV Input
-Plotly.d3.csv(
-    // Ist  nicht die locale file, weil ditt iwie nicht funktioniert aufgrund von Zugriffsbeschränkungen mit JavaScript
+function getData() {
+	// D3 CSV Input
+	Plotly.d3.csv(
+		// Ist  nicht die locale file, weil ditt iwie nicht funktioniert aufgrund von Zugriffsbeschränkungen mit JavaScript
 	//"https://gist.githubusercontent.com/florianeichin/b877d354d6bc52e6ce840572e40b0497/raw/19759410471073756a388dada5fcb40109f0d13e/flights_subset_cleaned.csv", // Subset
 	"https://gist.githubusercontent.com/florianeichin/cfa1705e12ebd75ff4c321427126ccee/raw/c86301a0e5d0c1757d325424b8deec04cc5c5ca9/flights_all_cleaned.csv", // Richtiges
 	(err, rows) => {
@@ -263,7 +264,8 @@ Plotly.d3.csv(
 		renderBarPlot()
 		renderPiePlot()
 	}
-);
+	);
+}
 
 
 // Funktion um den Durschnitt eines Arrays zu berechnen
@@ -487,4 +489,9 @@ function renderPiePlot() {
 	var config = {responsive: true}
 
 	Plotly.newPlot("pie-plot", data, {}, config);
+}
+
+// Main
+function latency_main() {
+	getData()
 }

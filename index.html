@@ -50,16 +50,6 @@
                                 </span>
                                 <span class="mdc-tab__ripple"></span>
                             </button>
-                            <button class="mdc-tab" role="tab" aria-selected="false" tabindex="2" data-content="creative">
-                                <span class="mdc-tab__content">
-                                    <span class="mdc-tab__icon material-icons" aria-hidden="true">donut_large</span>
-                                    <span class="mdc-tab__text-label">Creative</span>
-                                </span>
-                                <span class="mdc-tab-indicator">
-                                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                                </span>
-                                <span class="mdc-tab__ripple"></span>
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -70,7 +60,7 @@
 
             <!-- Verspätungsinhalt Tab -->
             <div id="tab-content-latency" class="tab-content">
-                <div class="mapWrapper">
+                <div class="mapWrapper card">
                     <div class="map-plot" id="map-plot"></div>
                     <div class="map-selections">
 
@@ -181,7 +171,7 @@
 
                 <hr>
 
-                <div class="barWrapper">
+                <div class="barWrapper card">
                     <div class="bar-selections">
                         <h1 class="mdc-typography--headline4">X-Achse</h1>
                         <div class="selections-wrapper mdc-form-field">
@@ -307,7 +297,7 @@
 
                 <hr>
 
-                <div class="pieWrapper">
+                <div class="pieWrapper card">
                     <div class="pie-selections">
                         <h1 class="mdc-typography--headline4">Grafikerklärung</h1>
                         <div class="selections-wrapper">
@@ -331,11 +321,11 @@
                 <h1 class="mdc-typography--headline2">Allgemeine Verspätungen</h1>
                 <div class="weather-section">
                     <div class="weatherAllTime" id="weatherAllTime"></div>
-                    <div>
+                    <div class="operator-wrapper">
                         <h1 class="mdc-typography--headline4">Operator</h1>
                         <div class="selections-wrapper mdc-form-field">
                             <div><div class="mdc-radio">
-                                <input class="mdc-radio__native-control" type="radio" id="radio-perc" name="radios-weather" value="percentage" onclick="runPieAllTime(this);" checked>
+                                <input class="mdc-radio__native-control" type="radio" id="radio-perc" name="radios-weather" value="percentage" onclick="runPieAllTime('percentage');" checked>
                                 <div class="mdc-radio__background">
                                     <div class="mdc-radio__outer-circle"></div>
                                     <div class="mdc-radio__inner-circle"></div>
@@ -345,7 +335,7 @@
                             <label class="specialLabel" for="radio-perc">Prozent (%)</label></div>
 
                             <div><div class="mdc-radio">
-                                <input class="mdc-radio__native-control" type="radio" id="radio-abs" name="radios-weather" value="absolute" onclick="runPieAllTime(this);">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-abs" name="radios-weather" value="absolute" onclick="runPieAllTime('absolute');">
                                 <div class="mdc-radio__background">
                                     <div class="mdc-radio__outer-circle"></div>
                                     <div class="mdc-radio__inner-circle"></div>
@@ -362,9 +352,10 @@
                 <h1 class="mdc-typography--headline2">Verspätungen und Wetter pro Stunde</h1>
                 <div class="weather-section">
                     <div class="slider-wrapper">
-                        <p id="weatherNow"></p>
+                        <h1 class="mdc-typography--headline4" id="weatherNow"></h1>
+                        <h1 class="mdc-typography--headline6">Uhrzeit:</h1>
                         <div class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider"
-                                aria-valuemin="6" aria-valuemax="22" aria-valuenow="12" data-step="1"
+                                aria-valuemin="6" aria-valuemax="21" aria-valuenow="12" data-step="1"
                                 aria-label="Select Value">
                             <div class="mdc-slider__track-container">
                                 <div class="mdc-slider__track"></div>
@@ -390,12 +381,6 @@
                     <div class="weatherBarGraph" id="weatherBarGraph"></div>
                 </div>
             </div>
-
-
-            <!-- Sonstigesinhalt Tab -->
-            <div id="tab-content-creative" class="tab-content">
-                <h1>Creative</h1>
-            </div>
         </main>
     </body>
     
@@ -417,11 +402,13 @@
                 if (active_content) active_content.hide()
                 active_content = $('#tab-content-'+should_be_active_keyword);
                 active_content.show()
+                latency_main()
+                weather_main()
             })
         }
 
         // Start Script only after loading the whole page!
-        $( document ).ready(function() {
+        $( document ).ready(async function() {
 
             // Initialize all mdc button ripples
             for (e of $('.mdc-button').get()) { mdc.ripple.MDCRipple.attachTo(e); }
@@ -435,7 +422,8 @@
             // MDC automatic initalizing
             mdc.autoInit();
 
-            // Initialize tabs
+            latency_main()
+            weather_main()
             init_tabs()
         });
     </script>
