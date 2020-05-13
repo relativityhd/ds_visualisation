@@ -9,6 +9,7 @@
         <script src="./Scripts/jquery.slim.min.js"></script>
         <script src="./Scripts/plotly.min.js"></script>
         <script src="./Scripts/latency.js"></script>
+        <script src="./Scripts/weather.js"></script>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
@@ -326,11 +327,69 @@
 
             <!-- Wetterinhalt Tab -->
             <div id="tab-content-weather" class="tab-content">
-                <h1>Wetter</h1>
+
+                <h1 class="mdc-typography--headline2">Allgemeine Verspätungen</h1>
+                <div class="weather-section">
+                    <div class="weatherAllTime" id="weatherAllTime"></div>
+                    <div>
+                        <h1 class="mdc-typography--headline4">Operator</h1>
+                        <div class="selections-wrapper mdc-form-field">
+                            <div><div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-perc" name="radios-weather" value="percentage" onclick="runPieAllTime(this);" checked>
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label class="specialLabel" for="radio-perc">Prozent (%)</label></div>
+
+                            <div><div class="mdc-radio">
+                                <input class="mdc-radio__native-control" type="radio" id="radio-abs" name="radios-weather" value="absolute" onclick="runPieAllTime(this);">
+                                <div class="mdc-radio__background">
+                                    <div class="mdc-radio__outer-circle"></div>
+                                    <div class="mdc-radio__inner-circle"></div>
+                                </div>
+                                <div class="mdc-radio__ripple"></div>
+                            </div>
+                            <label class="specialLabel" for="radio-abs">Absolut (SUM)</label></div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <h1 class="mdc-typography--headline2">Verspätungen und Wetter pro Stunde</h1>
+                <div class="weather-section">
+                    <div class="slider-wrapper">
+                        <p id="weatherNow"></p>
+                        <div class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider"
+                                aria-valuemin="6" aria-valuemax="22" aria-valuenow="12" data-step="1"
+                                aria-label="Select Value">
+                            <div class="mdc-slider__track-container">
+                                <div class="mdc-slider__track"></div>
+                            </div>
+                        <div class="mdc-slider__thumb-container">
+                            <div class="mdc-slider__pin">
+                            <span class="mdc-slider__pin-value-marker"></span>
+                            </div>
+                        <svg class="mdc-slider__thumb" width="21" height="21">
+                            <circle cx="10.5" cy="10.5" r="7.875"></circle>
+                        </svg>
+                            <div class="mdc-slider__focus-ring"></div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="weatherPieHourly" id="weatherPieHourly"></div>
+                </div>
+
+                <hr>
+
+                <h1 class="mdc-typography--headline2">Verspätungen nach Wetter</h1>
+                <div class="weather-section">
+                    <div class="weatherBarGraph" id="weatherBarGraph"></div>
+                </div>
             </div>
-
-
-
 
 
             <!-- Sonstigesinhalt Tab -->
@@ -364,9 +423,6 @@
         // Start Script only after loading the whole page!
         $( document ).ready(function() {
 
-            // Initialize tabs
-            init_tabs()
-
             // Initialize all mdc button ripples
             for (e of $('.mdc-button').get()) { mdc.ripple.MDCRipple.attachTo(e); }
             for (e of $('.mdc-fab').get()) { mdc.ripple.MDCRipple.attachTo(e); }
@@ -374,8 +430,13 @@
 
             const topAppBar = new mdc.topAppBar.MDCTopAppBar($('.mdc-top-app-bar').get(0));
             const tabBar = new mdc.tabBar.MDCTabBar($('.mdc-tab-bar').get(0));
+            const slider = new mdc.slider.MDCSlider($('.mdc-slider').get(0));
+            slider.listen('MDCSlider:change', () => {runPie(slider.value)});
             // MDC automatic initalizing
             mdc.autoInit();
+
+            // Initialize tabs
+            init_tabs()
         });
     </script>
 </html>

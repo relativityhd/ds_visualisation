@@ -54,3 +54,15 @@ main {
     transform: translateY(-4px);
     cursor: pointer;
 }
+
+.weather-section{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.slider-wrapper{
+    min-width: 400px;
+    margin: 10px;
+}
