@@ -119,7 +119,6 @@ function getData() {
 
 			let rows_dep_delay = parseFloat(row["DEPARTURE_DELAY"]),
 				rows_dest_delay = parseFloat(row["DESTINATION_DELAY"]),
-				rows_scd_time = parseFloat(row["SCHEDULED_TIME"]),
 				rows_elap_time = parseFloat(row["ELAPSED_TIME"]),
 				rows_dist = parseFloat(row["DISTANCE"])
 			
@@ -213,7 +212,7 @@ function getData() {
 			}
 		})
 
-		// Berechne den Durschnitt und die Summe
+		// Berechne den Durschnitt und die Summe für alle nötigen Werte
 		Object.keys(dest_airports).forEach(key => {
 			let dad = dest_airports[key]
 			dad["DEPARTURE_DELAY_AVG"] = getAVG(dad["DEPARTURE_DELAY"])
@@ -236,6 +235,15 @@ function getData() {
 			oad["FLIGHTTIME_KM_SUM"] = getSUM(oad["FLIGHTTIME_KM"])
 			oad["RECOVERED_FLIGHTTIME_KM_SUM"] = getSUM(oad["RECOVERED_FLIGHTTIME_KM"])
 		})
+		/**
+		 * Herzlichen Glückwunsch Florian, du hast den geheimen Kommentar gefunden!
+		 * Deine Vorlesung war echt mega gut, ich fand das waren die besten Vorlesungen die wir jemals hatten!
+		 * Hier eine Katze für dich:
+		 *       |\      _,,,---,,_
+		 * ZZZzz /,`.-'`'    -.  ;-;;,_
+		 *		 (,4-  ) )-,_. ,\ (  `'-'
+		 *	   '---''(_/--'  `-'\_)
+		 */
 		Object.keys(airlines).forEach(key => {
 			let ald = airlines[key]
 			ald["DEPARTURE_DELAY_AVG"] = getAVG(ald["DEPARTURE_DELAY"])
@@ -287,7 +295,10 @@ function getSUM(arr) {
 
 // Sorgt interaktiv dafür, dass dem Plot die richtigen Daten gegeben werden. Steuerung über keyword.
 function unpack_map(keyword) {
-	let mapby = keyword == "port" ? "AIRPORT" :
+	// Gesucht ist mapby, ein key aus einer Zeile aus dest_airports, dieser wird aus dem übermittelten keyword,
+	// sowie dem Benutzer input (map_op_choice) ermittelt
+	let mapby =
+				keyword == "port" ? "AIRPORT" :
 				keyword == "lat" ? "AIRPORT_LAT" :
 				keyword == "lon" ? "AIRPORT_LON" :
 				keyword == "abflug-late" ? "DEPARTURE_DELAY_"+map_op_choice :
@@ -296,6 +307,7 @@ function unpack_map(keyword) {
 				keyword == "aufgeholt" ? "RECOVERED_FLIGHTTIME_KM_"+map_op_choice:
 				"AIRPORT"
 
+	// Returnt ein Array aus Werten (für jeden Flugahafen), welche zum oben gesuchten key gehören
 	if (airport_choice == "ankunft-port") {
 		return Object.keys(dest_airports).map(key => {
 			return dest_airports[key][mapby]
@@ -315,10 +327,15 @@ function renderMapPlot() {
 		minval = Math.min.apply(Math, late_data),
 		maxval = Math.max.apply(Math, late_data)
 	let size_data = late_data.map(val => {
-		val = val - minval
-		return parseInt(4 + (20*val/(maxval - minval)))
+		// Hier die Berechnung. Bin ich ehrlich, keine Ahnung mehr warum sie so ist wie sie ist, habe ich gestern gemacht...
+		// 4 ist auf jeden Fall die kleinste Punkt Größe, und 24 (4 + 20) glaube ich die Größte.
+		// Im Term (val - minval)/(maxval - minval) wird wahrscheinlich das Verhältnis des Wertes zu den größten und kleinsten
+		// Werten berechnet (zwischen 0 und 1)
+		return parseInt(4 + (20*(val - minval)/(maxval - minval)))
 	})
 
+	// Hier wird die unpack_map Funktion genutzt (oben definiert), um die Arrays gefüllt mit den
+	// benötigten Daten zu bekommen.
 	var data = [
 		{
 			type: "scattermapbox",
@@ -331,6 +348,7 @@ function renderMapPlot() {
 				showscale: true,
 				colorbar: {
 					title: {
+						// Ermittel Text, der neben der colorbar stehen soll, um diese zu erklären
 						text: (km_choice == "flugzeit" ? "Flugzeit" : "Aufgeholte Flugzeit")+" in Minuten / 1000 km",
 						side: "right"
 					}
@@ -376,7 +394,7 @@ function map_radio_changed(type, radioBtn) {
  * ========================================================================================================
  */
 
-// Bar Plot funktionert von Datenaufbau her genauso wie Map Plot!!! 
+// Bar Plot funktionert von Daten- und Funktionsaufbau her genauso wie Map Plot!!! 
 
 function unpack_bar(keyword) {
 
@@ -445,22 +463,27 @@ function bar_radio_changed(type, radioBtn) {
  * ========================================================================================================
  */
 
-// Funktion nimm die 5 Werte mit den meisten Verspätungen und gibt entweder die Werte oder die Labels dieser 5, sowie des Rests summiert, zurück.
+// Funktion nimmt die 5 Flüge mit den meisten Verspätungen und gibt entweder die Werte oder die Labels
+// dieser 5 zurück. Außerdem wird dem zurückgebendem Array auch noch ein Rest mitgegeben.
+// Am besten gar nicht erst versuchen zu verstehen.
 function unpack_pie(type) {
 
 	if (type == "values") {
+		// Sortierte Verspätungen der Flüge
 		let sorted_arr = Object
 			.keys(flights)
-			.map(key => {
-				return flights[key]["FLIGHTTIME_KM_SUM"]
-			}).sort((a, b) => {
-				return a < b ? 1 : a > b ? -1 : 0
-			})
+			.map(key => { return flights[key]["DESTINATION_DELAY_AVG"] })
+			.filter(delay => { return delay > 0 })
+			.sort((a, b) => { return a < b ? 1 : a > b ? -1 : 0 })
+		// Gibt die ersten 5 (also die Verspäteste), sowie der Durschnitt des Rests zurück
 		return sorted_arr.slice(0, 5).concat([getAVG(sorted_arr.slice(5))]).map(val => {return val.toFixed(2)})
 	} else if (type == "labels") {
+		// Ähnlich wie oben, nur hier wird zusätzlich noch der Name des Flugs mitgegeben, da man hier ja diesen
+		// am Ende zurück bekommen möchte
 		let sorted_arr = Object
 			.keys(flights)
-			.map(key => { return {v: flights[key]["FLIGHTTIME_KM_SUM"], n: key} })
+			.map(key => { return {v: flights[key]["DESTINATION_DELAY_AVG"], n: key} })
+			.filter(e => { return e.v > 0 })
 			.sort((a, b) => { return a.v < b.v ? 1 : a.v > b.v ? -1 : 0 })
 			.slice(0, 5)
 			.map(o => { return "FLIGHT-"+o.n })

@@ -15,6 +15,7 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     </head>
     
+    <!-- MDC = Material Design Components (Googles WebComponents) -->
     <body class="mdc-typography">
         <!-- MDC Top App Bar-->
         <header class="mdc-top-app-bar mdc-top-app-bar--fixed">
@@ -24,6 +25,7 @@
                 </section>
             </div>
         </header>
+
         <main>
             <!-- MDC Tabs -->
             <div class="mdc-tab-bar" role="tablist">
@@ -58,12 +60,16 @@
 
 
 
-            <!-- Verspätungsinhalt Tab -->
+            <!-- Verspätungs Tabinhalt -->
             <div id="tab-content-latency" class="tab-content">
+
+                <!-- Map Sektion: Mapplot und Einstellungen -->
                 <div class="mapWrapper card">
+                    <!-- DIV für Map Plot -->
                     <div class="map-plot" id="map-plot"></div>
                     <div class="map-selections">
 
+                        <!-- Einstellungen für Ankunft/ Abflug Flughafen-->
                         <h1 class="mdc-typography--headline4">Flughafen</h1>
                         <div class="selections-wrapper mdc-form-field">
                             <div><div class="mdc-radio">
@@ -87,6 +93,7 @@
                             <label class="specialLabel" for="radio-abflug-port">Abflugs Flughafen</label></div>
                         </div>
 
+                        <!-- Einstellungen für Verspätungen -->
                         <h1 class="mdc-typography--headline4">Verspätung</h1>
                         <div class="selections-wrapper mdc-form-field">
                             <div><div class="mdc-radio">
@@ -110,6 +117,7 @@
                             <label class="specialLabel" for="radio-abflug-late">Verspätung bei Abflug</label></div>
                         </div>
 
+                        <!-- Einstellungen für 3. Komponente -->
                         <h1 class="mdc-typography--headline4">Zeit</h1>
                         <div class="selections-wrapper mdc-form-field">
                             <div><div class="mdc-radio">
@@ -133,6 +141,7 @@
                             <label class="specialLabel" for="radio-aufgeholt">Aufgeholte Verspätung</label></div>
                         </div>
 
+                        <!-- Einstellungen für den Operator -->
                         <h1 class="mdc-typography--headline4">Operator</h1>
                         <div class="selections-wrapper mdc-form-field">
                             <div><div class="mdc-radio">
@@ -156,6 +165,7 @@
                             <label class="specialLabel" for="radio-sum">Absolut (SUM)</label></div>
                         </div>
 
+                        <!-- Erklärung der Grafik -->
                         <h1 class="mdc-typography--headline4">Grafikerklärung</h1>
                         <div class="selections-wrapper">
                             <span class="mdc-typography--body1">
@@ -168,11 +178,15 @@
                         </div>
                     </div>
                 </div>
+                <!-- Map Sektion Ende -->
 
                 <hr>
 
+                <!-- Bar Chart Sektion -->
                 <div class="barWrapper card">
                     <div class="bar-selections">
+
+                        <!-- Einstellung der X Achse -->
                         <h1 class="mdc-typography--headline4">X-Achse</h1>
                         <div class="selections-wrapper mdc-form-field">
                             <div><div class="mdc-radio">
@@ -216,6 +230,7 @@
                             <label class="specialLabel" for="radio-x-flugnummer">Flugnummer</label></div>
                         </div>
 
+                        <!-- Einstellung der Y Achse -->
                         <h1 class="mdc-typography--headline4">Y-Achse</h1>
                         <div class="selections-wrapper mdc-form-field">
                             <div><div class="mdc-radio">
@@ -261,6 +276,7 @@
                             <label class="specialLabel" for="radio-y-aufgeholt">Aufgeholte Verspätung</label></div>
                         </div>
 
+                        <!-- Einstellung des Operators -->
                         <h1 class="mdc-typography--headline4">Operator</h1>
                         <div class="selections-wrapper mdc-form-field">
                             <div><div class="mdc-radio">
@@ -284,6 +300,7 @@
                             <label class="specialLabel" for="radio-sum-bar">Absolut (SUM)</label></div>
                         </div>
 
+                        <!-- Erklärung der Grafik -->
                         <h1 class="mdc-typography--headline4">Grafikerklärung</h1>
                         <div class="selections-wrapper">
                             <span class="mdc-typography--body1">
@@ -291,14 +308,20 @@
                                 Auch hier hat der Benutzer wieder Wahlmöglichkeiten, ähnlich wie oben. Zusätzlich zu den Flughäfen kann er noch zwischen Airlines und Flugnummern wählen.
                             </span>
                         </div>
+
                     </div>
+                    <!-- DIV für Bar Plot -->
                     <div class="bar-plot" id="bar-plot"></div>
                 </div>
+                <!-- Bar Chart Sektion Ende -->
 
                 <hr>
 
+                <!-- Pie Chart Sektion -->
                 <div class="pieWrapper card">
                     <div class="pie-selections">
+
+                        <!-- Erklärung der Grafik -->
                         <h1 class="mdc-typography--headline4">Grafikerklärung</h1>
                         <div class="selections-wrapper">
                             <span class="mdc-typography--body1">
@@ -306,9 +329,13 @@
                                 sowie zum Vergleich den Durschnitt der Summen des Restes.
                             </span>
                         </div>
+
                     </div>
+                    <!-- DIV für Pie Plot -->
                     <div class="pie-plot" id="pie-plot"></div>
                 </div>
+                <!-- Pie Chart Sektion Ende-->
+
             </div>
 
 
@@ -390,7 +417,7 @@
 
     <script>
 
-        // Function to handle active and non active content tabs
+        // Diese Funktion handelt welcher Tab gerade aktiv sein soll und welcher nicht
         let active_content;
         function init_tabs() {
             $('.tab-content').hide()
@@ -407,23 +434,29 @@
             })
         }
 
-        // Start Script only after loading the whole page!
+        // Starte Script erst nachdem alles fertig geladen wurde
         $( document ).ready(async function() {
 
-            // Initialize all mdc button ripples
+            // Initialisiere alle Buttons für MDC
             for (e of $('.mdc-button').get()) { mdc.ripple.MDCRipple.attachTo(e); }
             for (e of $('.mdc-fab').get()) { mdc.ripple.MDCRipple.attachTo(e); }
             for (e of $('.mdc-icon-button').get()) { new mdc.ripple.MDCRipple(e).unbounded = true; }
 
+            // Initiere andere MDC Komponenten
             const topAppBar = new mdc.topAppBar.MDCTopAppBar($('.mdc-top-app-bar').get(0));
             const tabBar = new mdc.tabBar.MDCTabBar($('.mdc-tab-bar').get(0));
             const slider = new mdc.slider.MDCSlider($('.mdc-slider').get(0));
+            // Wenn der Slider bewegt wird, soll der Pie Plot neu berechnet werden
             slider.listen('MDCSlider:change', () => {runPie(slider.value)});
+
             // MDC automatic initalizing
             mdc.autoInit();
 
+            // Mach Data Science
             latency_main()
             weather_main()
+            
+            // Initiere Tabs
             init_tabs()
         });
     </script>
