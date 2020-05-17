@@ -230,7 +230,10 @@ function renderWeatherPieAllTimePercentage(){
     let departureDelayPie = [{
         values: [delayedFlightsAllTime,punctualFlightsAllTime],
         labels: ['Verspätet', 'Pünktlich'],
-        type: 'pie'
+        type: 'pie',
+        marker: {
+            colors: ['rgb(80,0,5)','rgb(0,60,10)']
+        },
       }];
       
     Plotly.newPlot('weatherAllTime', departureDelayPie, {}, {responsive: true});
@@ -242,7 +245,10 @@ function renderWeatherPieAllTimeAbsolute(){
         {
           x: ["Verspätet", "Pünktlich"],
           y: [absoluteDelayAllTime,absolutePunctualityAllTime],
-          type: 'bar'
+          type: 'bar',
+          marker: {
+            color: 'rgb(56, 75, 126)'
+            }
         }
       ];
       
@@ -254,7 +260,10 @@ function renderWeatherPieHourly(){
     let departureDelayPieHourly = [{
         values: [delayedFlights,punctualFlights],
         labels: ['Verspätet', 'Pünktlich'],
-        type: 'pie'
+        type: 'pie',
+        marker: {
+            colors: ['rgb(80,0,5)','rgb(0,60,10)']
+        },
       }];
       
     Plotly.newPlot('weatherPieHourly', departureDelayPieHourly, {}, {responsive: true});
@@ -268,7 +277,7 @@ function renderBarPercentage(){
         type: 'bar',
         text: [(convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsFair,punctualFlightsFair)) + ' below the mean', (convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFLightsPartly,punctualFlightsPartly)) + ' below the mean', (convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsMostly,punctualFlightsMostly)) + ' below the mean', (convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsCloudy,punctualFlightsCloudy)) + ' below the mean', ((convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsRainy,punctualFlightsRainy))* -1) +' above the mean'],
         marker: {
-        color: 'rgb(142,124,195)'
+        color: 'rgb(56, 75, 126)'
         }
     };
     
