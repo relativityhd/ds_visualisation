@@ -244,7 +244,7 @@ function renderWeatherPieAllTimePercentage(){
 function renderWeatherPieAllTimeAbsolute(){
     let data = [
         {
-          x: ["Verspätet", "Pünktlich"],
+          x: ["Verspätungen", "Verfrühungen"],
           y: [absoluteDelayAllTime,absolutePunctualityAllTime],
           type: 'bar',
           marker: {
@@ -276,7 +276,7 @@ function renderBarPercentage(){
         x: ["Fair","Partly Cloudy","Mostly Cloudy","Cloudy","Light Rain"],
         y: [convertToPercentage(delayedFlightsFair,punctualFlightsFair),convertToPercentage(delayedFLightsPartly,punctualFlightsPartly),convertToPercentage(delayedFlightsMostly,punctualFlightsMostly),convertToPercentage(delayedFlightsCloudy,punctualFlightsCloudy),convertToPercentage(delayedFlightsRainy,punctualFlightsRainy)],
         type: 'bar',
-        text: [(convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsFair,punctualFlightsFair)) + ' below the mean', (convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFLightsPartly,punctualFlightsPartly)) + ' below the mean', (convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsMostly,punctualFlightsMostly)) + ' below the mean', (convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsCloudy,punctualFlightsCloudy)) + ' below the mean', ((convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsRainy,punctualFlightsRainy))* -1) +' above the mean'],
+        text: [(convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsFair,punctualFlightsFair)) + ' unter dem Durchschnitt', (convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFLightsPartly,punctualFlightsPartly)) + ' unter dem Durchschnitt', (convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsMostly,punctualFlightsMostly)) + ' unter dem Durchschnitt', (convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsCloudy,punctualFlightsCloudy)) + ' unter dem Durchschnitt', ((convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsRainy,punctualFlightsRainy))* -1) +' über dem Durchschnitt'],
         marker: {
             color: 'rgb(56, 75, 126)'
             }
