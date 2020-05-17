@@ -64,6 +64,7 @@ async function runPie(currentTime) {
     $('#weatherNow').html(data[1][(currentTime - 1)]["Condition"])
     //Erstellen der Graphen
     renderWeatherPieHourly()
+    renderBarPercentage()
 }
 
 //Funktion zur Kalkulation der Daten für das Gesamtdaten Kuchendiagramm
@@ -277,8 +278,8 @@ function renderBarPercentage(){
         type: 'bar',
         text: [(convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsFair,punctualFlightsFair)) + ' below the mean', (convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFLightsPartly,punctualFlightsPartly)) + ' below the mean', (convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsMostly,punctualFlightsMostly)) + ' below the mean', (convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsCloudy,punctualFlightsCloudy)) + ' below the mean', ((convertToPercentage(delayedFlightsAllTime,punctualFlightsAllTime) - convertToPercentage(delayedFlightsRainy,punctualFlightsRainy))* -1) +' above the mean'],
         marker: {
-        color: 'rgb(56, 75, 126)'
-        }
+            color: 'rgb(56, 75, 126)'
+            }
     };
     
     var data = [trace1];
